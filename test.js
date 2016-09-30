@@ -9,7 +9,7 @@ mongoose.connection.on('open', function() {
         console.log('listDatabases succeeded');
         // database list stored in result.databases
         var allDatabases = result.databases;    
-        console.log("Databases: " + allDatabases);
+        console.log("Databases: " + JSON.stringify(allDatabases));
         mongoose.connection.close();
     });
 });
