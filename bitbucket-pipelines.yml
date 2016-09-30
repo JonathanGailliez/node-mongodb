@@ -8,7 +8,7 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
-          - npm install mongoose
           - service mongod start
+          - npm install mongoose
           - mongo < data.js
           - node test.js
