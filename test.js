@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/test_database');
 
 mongoose.connection.on('open', function() {
     // connection established
-    new mongoose.Admin(mongoose.connection.db).listDatabases(function(err, result) {
+    new mongoose.connection.Admin(mongoose.connection.db).listDatabases(function(err, result) {
         console.log('listDatabases succeeded');
         // database list stored in result.databases
         var allDatabases = result.databases;    
