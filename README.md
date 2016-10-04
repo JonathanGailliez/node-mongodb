@@ -6,7 +6,7 @@ The Docker image is using node 4.6 and MongoDB 3.2
 
 ## Quickstart
 
-###Using the image with Bitbucket Pipelines
+### Using the image with Bitbucket Pipelines
 
 Just copy/paste the YML below in your bitbucket-pipelines.yml and adapt the script to your needs.
 
@@ -24,6 +24,28 @@ pipelines:
           - npm install mongoose     
           - service mongod start     # Run this command to start the Mongo daemon
           - node test.js             # Replace this with any command you need.
+```
+
+### Using this in a script
+
+You'll find a sample script in this repository in test.js. It simply connects to MongoDB using the mongoose package and then lists the existing databases.
+
+```javascript
+var mongoose = require('mongoose');
+
+/// create a connection to the DB    
+mongoose.connect('mongodb://localhost/test_database');
+
+mongoose.connection.on('open', function() {
+    // connection established
+    new mongoose.mongo.Admin(mongoose.connection.db).listDatabases(function(err, result) {
+        console.log('listDatabases succeeded');
+        // database list stored in result.databases
+        var allDatabases = result.databases;    
+        console.log("Databases: " + JSON.stringify(allDatabases));
+        mongoose.connection.close();
+    });
+});
 ```
 
 ## Create your own image
