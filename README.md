@@ -51,6 +51,9 @@ mongoose.connection.on('open', function() {
 ## Create your own image
 
 If you want to use a different version of Node.js you can simply create your own image for it. Just copy the content of the Dockerfile and replace the first line.
+
+This image is built from the official Node.js image at https://hub.docker.com/_/node/ and you can find there all the different versions that are supported.
+
 Your Dockerfile won't need to have an ENTRYPOINT or CMD line as Bitbucket Pipelines will run the script commands that you put in your bitbucket-pipelines.yml file instead.
 
 ```
