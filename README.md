@@ -51,14 +51,16 @@ mongoose.connection.on('open', function() {
 ## Create your own image
 
 If you want to use a different version of Node.js you can simply create your own image for it. Just copy the content of the Dockerfile and replace the first line.
+Your Dockerfile won't need to have an ENTRYPOINT or CMD line as Bitbucket Pipelines will run the script commands that you put in your bitbucket-pipelines.yml file instead.
 
 ```
-FROM node:4.6 # Replace this with the version of node you need.
-RUN apt-get update
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-RUN echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-RUN apt-get update
-RUN apt-get install -y mongodb-org
+FROM node:4.6
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
+  && echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list \
+  && apt-get update \
+  && apt-get install -y mongodb-org --no-install-recommends \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ```
 
 ### Build the image
