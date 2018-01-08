@@ -1,8 +1,10 @@
 # Node.js and MongoDB for Bitbucket Pipelines
 
+All credits go to: https://bitbucket.org/spittet/node-mongodb
+
 This repository contains a Dockerfile as well as a simple example that shows how you can run your own Docker container with Node.js and MongoDB on Bitbucket Pipelines.
 
-The Docker image is using node 4.6 and MongoDB 3.2
+The Docker image is using node 6.10 and MongoDB 3.4
 
 ## Quickstart
 
